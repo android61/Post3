@@ -232,14 +232,15 @@ object WallService {
     fun createComment(postId: Int, comment: Comment): Comment {
         for (post in posts)
             if (post.id == postId) {
-                comments += comment
-                return comment
+                comments += comment.copy()
+                return comments.last()
             }
         throw PostNotFoundException("no post with id $postId")
     }
 
     fun clear() {
         posts = emptyArray()
+        comments = emptyArray()
         lastId = 0
     }
 
